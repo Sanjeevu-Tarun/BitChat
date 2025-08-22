@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- For images sent by the user (stored in files directory) -->
+    <files-path name="sent_images" path="." />
+
+    <!-- For images received from other users (stored in cache directory) -->
+    <cache-path name="received_images" path="." />
+
+    <!-- For external storage (if needed) -->
+    <external-path name="external_files" path="." />
+</paths>

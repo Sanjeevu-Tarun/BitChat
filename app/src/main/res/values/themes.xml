@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.BitChat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- App Primary Colors -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Explicit status bar color -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+
+        <!-- Make content draw behind status bar for better immersive UI -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
