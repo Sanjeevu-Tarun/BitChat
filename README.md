@@ -74,27 +74,41 @@ Whether you're in a remote mountain camp, a college campus with a congested netw
 
 BitChat follows **MVVM + Repository** pattern, ensuring a clean separation of concerns and full testability.
 
-```
-┌─────────────────────────────────────────────┐
-│               Jetpack Compose UI             │
-│         (Screens, Components, State)         │
-└──────────────────┬──────────────────────────┘
-                   │  observes StateFlow
-┌──────────────────▼──────────────────────────┐
-│                ViewModels                    │
-│         (Business Logic, UI State)           │
-└──────┬───────────────────────────┬───────────┘
-       │                           │
-┌──────▼───────┐         ┌────────▼──────────┐
-│  Bluetooth   │         │   Data Repository  │
-│  Repository  │         │   (Room DB / DAO)  │
-└──────┬───────┘         └────────────────────┘
-       │
-┌──────▼───────────────┐
-│  BluetoothService.kt │
-│  (RFCOMM Sockets,    │
-│   Streams, Threads)  │
-└──────────────────────┘
+```mermaid
+graph TD
+    UI(["🖥️ Jetpack Compose UI\nScreens · Components · State"])
+    VM["⚙️ ViewModels\nHomeViewModel · ChatViewModel\nBusiness logic · UI state"]
+
+    BTRepo["📡 Bluetooth Repository\nAbstraction over Android BT API\nDevice discovery · RSSI tracking"]
+    DataRepo["🗄️ Data Repository\nSingle source of truth\nChat sessions · Messages"]
+
+    BTService["🔌 BluetoothService\nRFCOMM server / client sockets\nByte streams · Threads"]
+    Room[("💾 Room Database\nAppDatabase · MessageDao\nType-safe SQLite")]
+
+    Encrypt["🔐 EncryptionUtils\nEnd-to-end encryption\nMessage signing"]
+    FileUtils["📁 FileUtils\nMIME detection · Chunking\nFile transfer pipeline"]
+
+    Coroutines(["⚡ Coroutines + Flow\nNon-blocking IO · Reactive streams"])
+
+    UI -->|"observes StateFlow"| VM
+    VM --> BTRepo
+    VM --> DataRepo
+    BTRepo --> BTService
+    DataRepo --> Room
+    BTService --> Encrypt
+    BTService --> FileUtils
+    BTRepo -.->|"powered by"| Coroutines
+    DataRepo -.->|"powered by"| Coroutines
+
+    style UI fill:#1a1a2e,stroke:#7F52FF,color:#e2eaf4
+    style VM fill:#1a1a2e,stroke:#4285F4,color:#e2eaf4
+    style BTRepo fill:#1a1a2e,stroke:#3DDC84,color:#e2eaf4
+    style DataRepo fill:#1a1a2e,stroke:#3DDC84,color:#e2eaf4
+    style BTService fill:#1a1a2e,stroke:#FF6B35,color:#e2eaf4
+    style Room fill:#14532d,stroke:#22c55e,color:#e2eaf4
+    style Encrypt fill:#1a1a2e,stroke:#facc15,color:#e2eaf4
+    style FileUtils fill:#1a1a2e,stroke:#facc15,color:#e2eaf4
+    style Coroutines fill:#1a1a2e,stroke:#4285F4,color:#e2eaf4
 ```
 
 | Layer | Technology | Purpose |
