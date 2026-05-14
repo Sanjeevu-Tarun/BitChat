@@ -320,18 +320,7 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 
-See [LICENSE](LICENSE) for the full text.
 
----
-
-## 👨‍💻 Author
-
-**Sanjeevu Tarun Sree Prasad**
-
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [your-linkedin](https://linkedin.com/in/your-profile)
-
----
 
 <div align="center">
 
